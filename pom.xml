@@ -1,0 +1,59 @@
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.coutemeier.maven.plugins</groupId>
+    <artifactId>asciidoctor-lifecycle-maven-examples</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>Asciidoctor Lifecycle Maven examples</name>
+    <description>Collection of sample projects that demonstrate the features of the newlifecycle.</description>
+    <url>https://github.com/asciidoctor-lifecycle-maven-plugin/asciidoctor-lifecycle-maven-examples</url>
+
+    <developers>
+        <developer>
+            <id>rrialq</id>
+            <name>Ramón Rial</name>
+            <url>https://github.com/rrialq</url>
+            <roles>
+                <role>Project Lead</role>
+            </roles>
+            <timezone>UTC+1</timezone>
+        </developer>
+    </developers>
+    
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    
+    <prerequisites>
+        <maven>${mavenVersion}</maven>
+    </prerequisites>
+
+    <scm>
+        <url>scm:git:git@github.com:asciidoctor-lifecycle-maven-plugin/asciidoctor-lifecycle-maven-examples.git</url>
+        <connection>scm:git:git@github.com:asciidoctor-lifecycle-maven-plugin/asciidoctor-lifecycle-maven-examples.git</connection>
+        <developerConnection>scm:git:git@github.com:asciidoctor-lifecycler-maven-plugin/asciidoctor-lifecycle-maven-examples.git</developerConnection>
+    </scm>
+
+    <issueManagement>
+        <url>https://github.com/asciidoctor-lifecycle-maven-plugin/asciidoctor-lifecycle-maven-examples/issues</url>
+        <system>GitHub Issues</system>
+    </issueManagement>
+
+    <properties>
+        <mavenVersion>3.5.0</mavenVersion>
+    </properties>
+
+    <modules>
+        <module>asciidoc-example-parent</module>
+        <module>asciidoc-to-html-example</module>
+    </modules>
+</project>

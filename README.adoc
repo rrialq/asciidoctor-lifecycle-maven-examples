@@ -1,0 +1,34 @@
+= asciidoctor-lifecycle-maven-examples
+//
+:release-version: 1.0-SNAPSHOT
+:idprefix:
+:idseparator: -
+//
+ifdef::env-github,env-browser[]
+:toc: preamble
+endif::[]
+//
+ifndef::env-github[:icons: font]
+//
+:project-repo: asciidoctor-lifecycle-maven-plugin/asciidoctor-lifecycle-maven-examples
+:uri-repo: https://github.com/{project-repo}
+:uri-asciidoc: http://asciidoc.org
+:uri-asciidoctor: http://asciidoctor.org
+:uri-maven: http://maven.apache.org
+ifdef::env-github[]
+:!toc-title:
+:badges:
+:tag: master
+:tip-caption: :bulb:
+:note-caption: :paperclip:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+// Badges
+ifdef::badges[]
+endif::[]
+
+Collection of sample projects that demonstrate the features of the newlifecycle.
+
