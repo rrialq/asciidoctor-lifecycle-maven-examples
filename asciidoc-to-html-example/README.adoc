@@ -7,7 +7,7 @@ and the Asciidoctor Lifecycle Maven plugin
 
 Convert the AsciiDoc to HTML5 by invoking the `build` goal (configured as the default goal):
 
- $ mvn
+ $ mvn build
 
 Open the file _target/generated-docs/example-manual.html_ in your browser to see the generated HTML file.
 
