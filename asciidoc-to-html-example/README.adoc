@@ -5,7 +5,7 @@ and the Asciidoctor Lifecycle Maven plugin
 
 == Usage
 
-Convert the AsciiDoc to HTML5 by invoking the `build` goal (configured as the default goal):
+Convert the AsciiDoc to HTML5 by invoking the `build` goal:
 
  $ mvn build
 
