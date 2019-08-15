@@ -24,7 +24,6 @@
     </properties>
 
     <build>
-        <defaultGoal>process-resources</defaultGoal>
         <plugins>
             <plugin>
                 <groupId>org.asciidoctor</groupId>
