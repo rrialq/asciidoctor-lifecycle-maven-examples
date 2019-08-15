@@ -19,7 +19,7 @@ If you want to generate a kindle document, you can enable a second execution blo
 
 == Differences from the original example
 
-. Construction is executed on `build` phase, not in `process-resources` phase.
+. `process-asciidoc` is executed on `build` phase, not in `process-resources` phase.
 . The kindlegen execution was commented because it is not relevant for this example.
 . The example project packaging is `pom`, instead of `jar`, to avoid generating an empty jar.
 . Please, note that if you invoke the `package` goal you don't get nothing.
