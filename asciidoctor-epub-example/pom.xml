@@ -12,7 +12,7 @@
     <packaging>pom</packaging>
     <name>Asciidoctor EPUB Maven example using asciidoctor-lifecycle-maven-plugin</name>
     <description>An example project that demonstrates how to convert AsciiDoc to EPUB with Asciidoctor
-        Maven plugin and Asciidoctor Lifecycle Maven plugin and asciidoctor-lifecycle-maven-plugin.</description>
+        Maven plugin and Asciidoctor Lifecycle Maven plugin.</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
