@@ -11,5 +11,10 @@ Convert the AsciiDoc to HTML5 by invoking the `build` goal:
 
 Open the file _target/generated-docs/example-manual.html_ in your browser to see the generated HTML file.
 
-Please, note that if you invoke the `package` goal you don't get nothing.
+== Differences from the original example
+
+. Construction is executed on `build` phase, not in `process-resources` phase.
+. The kindlegen execution was commented because it is not relevant for this example.
+. The example project packaging is `pom`, instead of `jar`, to avoid generating an empty jar.
+. Please, note that if you invoke the `package` goal you don't get nothing.
 This is the expected result, because we are using the lifecycle.
