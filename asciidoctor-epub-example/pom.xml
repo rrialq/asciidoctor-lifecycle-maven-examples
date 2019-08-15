@@ -30,6 +30,7 @@
     </properties>
 
     <build>
+        <defaultGoal>build</defaultGoal>
         <plugins>
             <plugin>
                 <groupId>org.asciidoctor</groupId>
