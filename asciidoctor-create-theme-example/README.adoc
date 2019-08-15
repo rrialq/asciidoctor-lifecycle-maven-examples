@@ -1,0 +1,23 @@
+= Asciidoctor Maven Plugin: Asciidoc theme example
+
+This is an example of how a theme can be build to reuse them in our projects.
+Remember that there is no formal definition neither proposal about a theme, so the
+structure must be anything you want with the requirements of Asciidoctor.
+
+In this example, a theme is only a zip file that contains a `pdf` directory for store resources
+for pdf theming.
+
+This example create a theme by zipping the contents of `src/asciidoc/themes` to a file.
+
+== Usage
+
+Create and install the theme using:
+
+[source,shell]
+mvn install
+
+== Notes
+
+This example has no equivalent in original Asciidoctor Maven Examples.
+
+This example shows a way to reuse themes in many projects.
