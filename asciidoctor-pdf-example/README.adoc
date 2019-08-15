@@ -1,0 +1,19 @@
+= Asciidoctor Maven Plugin: AsciiDoc to PDF Example
+
+An example project that demonstrates how to convert AsciiDoc to PDF using Asciidoctor PDF with the Asciidoctor Maven plugin
+and the Asciidoctor Lifecycle Maven plugin.
+
+== Usage
+
+Convert the AsciiDoc to PDF using Asciidoctor PDF by invoking the `build` goal:
+
+ $ mvn build
+
+Open the file _target/generated-docs/example-manual.pdf_ in your PDF viewer to see the generated PDF.
+
+== Differences from the original example
+
+. `process-asciidoc` is executed on `build` phase, not in `process-resources` phase.
+. The example project packaging is `pom`, instead of `jar`, to avoid generating an empty jar.
+. Please, note that if you invoke the `package` goal you don't get nothing.
+This is the expected result, because we are using the lifecycle.
