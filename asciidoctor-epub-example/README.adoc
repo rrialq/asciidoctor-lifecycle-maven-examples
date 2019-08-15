@@ -7,7 +7,7 @@ and the Asciidoctor Lifecycle Maven plugin.
 
 === EPUB
 
-Convert the AsciiDoc to EPUB using Asciidoctor EPUB3 by invoking the `process-resources` goal:
+Convert the AsciiDoc to EPUB using Asciidoctor EPUB3 by invoking the `build` goal:
 
  $ mvn build
 
