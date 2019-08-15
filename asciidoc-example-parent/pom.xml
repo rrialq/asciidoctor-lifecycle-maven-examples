@@ -50,6 +50,7 @@
                         </dependency>
                     </dependencies>
                     <configuration>
+                        <sourceDirectory>src/docs/asciidoc</sourceDirectory>
                         <!-- Attributes common to all output formats -->
                         <attributes>
                             <endpoint-url>http://example.org</endpoint-url>
