@@ -18,7 +18,6 @@
         <jruby.version>9.2.7.0</jruby.version>
         
         <version.asciidoctor-lifecycle-maven-plugin>1.0-SNAPSHOT</version.asciidoctor-lifecycle-maven-plugin>
-        <mytheme.pdf.path>${project.build.directory}/asciidoctor-themes/asciidoctor-create-theme-example/pdf</mytheme.pdf.path>
     </properties>
 
     <build>
@@ -87,7 +86,11 @@
                             <sourceHighlighter>coderay</sourceHighlighter>
                             <doctype>book</doctype>
                             <attributes>
-                                <pdf-stylesdir>${mytheme.pdf.path}</pdf-stylesdir>
+                                <!-- 
+                                    The property "asciidoctor.theme.asciidoctor-create-theme-example.path" is created at theme-download phase,
+                                    so it is not needed to define it in the pom.xml.
+                                -->
+                                <pdf-stylesdir>${asciidoctor.theme.asciidoctor-create-theme-example.path}/pdf</pdf-stylesdir>
                                 <pdf-style>custom</pdf-style>
                                 <icons>font</icons>
                                 <pagenums/>

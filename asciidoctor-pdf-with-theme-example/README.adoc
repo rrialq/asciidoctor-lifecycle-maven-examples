@@ -3,7 +3,7 @@
 An example project that demonstrates how to convert AsciiDoc to PDF using Asciidoctor PDF with the Asciidoctor Maven plugin
 and the Asciidoctor Lifecycle Maven plugin.
 
-This example produces a book and make use of a YAML style sheet (defined in `src/theme`).
+This example produces a book and make use of a YAML style sheet (defined in the theme artifact).
 The same document is rendered twice:
 
 * Without the theme configuration, output is `target/generated-docs-default-theme/example-manual.pdf`
@@ -13,7 +13,7 @@ The same document is rendered twice:
 
 === Requirement
 
-This example tries to download the theme `com.coutemeier.maven.plugins:asciidoctor-create-theme-example:zip:1.0.0-SNAPSHOT`.
+This example tries to download the theme artifact `com.coutemeier.maven.plugins:asciidoctor-create-theme-example:zip:1.0.0-SNAPSHOT`.
 The sources for this theme are in `asciidoctor-create-theme-example` module.
 
 If you don't do before, you must manually build the `asciidoctor-create-theme-example` module using:
