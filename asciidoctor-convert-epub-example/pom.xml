@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    This is an example adapted from https://github.com/asciidoctor/asciidoctor-maven-examples/blob/master/asciidoc-epub-example
+    to show how to use the asciidoctor-lifecycle-maven-plugin.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.coutemeier.maven.plugins.asciidoctor.lifecycle</groupId>
+        <artifactId>asciidoctor-lifecycle-maven-examples</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>..</relativePath>
+    </parent>
+
+    <artifactId>asciidoctor-convert-epub-example</artifactId>
+    <packaging>pom</packaging>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>An example project that demonstrates how to convert AsciiDoc to EPUB with Asciidoctor
+        Maven plugin and Asciidoctor Lifecycle Maven plugin.</description>
+
+    <properties>
+        <asciidoctor.sourceDirectory>src/docs/asciidoc</asciidoctor.sourceDirectory>
+    </properties>
+
+    <build>
+        <defaultGoal>asciidoctor-convert</defaultGoal>
+        <plugins>
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <configuration>
+                    <attributes>
+                        <sourcedir>${project.build.sourceDirectory}</sourcedir>
+                    </attributes>
+                </configuration>
+                <executions>
+                    <!-- shows how to create an epub file -->
+                    <execution>
+                        <id>generate-spine-epub</id>
+                        <phase>asciidoctor-convert</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <backend>epub3</backend>
+                            <sourceHighlighter>coderay</sourceHighlighter>
+                            <sourceDocumentName>spine.adoc</sourceDocumentName>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- We use the asciidoctor-lifecycle-maven-plugin as extension -->
+            <plugin>
+                <groupId>com.coutemeier.maven.plugins</groupId>
+                <artifactId>asciidoctor-lifecycle-maven-plugin</artifactId>
+                <extensions>true</extensions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -5,16 +5,22 @@ and the Asciidoctor Lifecycle Maven plugin.
 
 == Usage
 
-Convert the AsciiDoc to HTML5 by invoking the `build` goal:
+Convert the AsciiDoc to HTML5:
 
- $ mvn build
+[source,shell]
+$ mvn
+
+or
+
+[source,shell]
+$ mvn asciidoctor-convert
 
 Open the file _target/generated-docs/example-manual.html_ in your browser to see the generated HTML file.
 
 == Differences from the original example
 
-. `process-asciidoc` is executed on `build` phase, not in `process-resources` phase.
+. `process-asciidoc` is executed on `asciidoctor-convert` phase, not in `process-resources` phase.
 . The kindlegen execution was commented because it is not relevant for this example.
 . The example project packaging is `pom`, instead of `jar`, to avoid generating an empty jar.
 . Please, note that if you invoke the `package` goal you don't get nothing.
-This is the expected result, because we are using the lifecycle.
+This is the expected result, because we are using the Asciidoctor Lifecycle Maven Plugin.

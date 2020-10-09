@@ -4,9 +4,9 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.coutemeier.maven.plugins</groupId>
+    <groupId>com.coutemeier.maven.plugins.asciidoctor.lifecycle</groupId>
     <artifactId>asciidoctor-lifecycle-maven-examples</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Asciidoctor Lifecycle Maven examples</name>
@@ -24,7 +24,7 @@
             <timezone>UTC+1</timezone>
         </developer>
     </developers>
-    
+
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -32,7 +32,7 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-    
+
     <prerequisites>
         <maven>${mavenVersion}</maven>
     </prerequisites>
@@ -49,17 +49,73 @@
     </issueManagement>
 
     <properties>
-        <mavenVersion>3.5.0</mavenVersion>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <mavenVersion>3.3.9</mavenVersion>
+        <plugin-version.asciidoctor>2.0.0-RC.1</plugin-version.asciidoctor>
+        <plugin-version.asciidoctor-lifecycle>1.0-SNAPSHOT</plugin-version.asciidoctor-lifecycle>
+        <plugin-version.maven-assembly>3.3.0</plugin-version.maven-assembly>
+        <plugin-version.maven-install>3.0.0-M1</plugin-version.maven-install>
+        <dependency-version.asciidoctorj-epub>1.5.0-alpha.13</dependency-version.asciidoctorj-epub>
+        <dependency-version.asciidoctorj-pdf>1.5.0-alpha.17</dependency-version.asciidoctorj-pdf>
+        <dependency-version.asciidoctorj>2.2.0</dependency-version.asciidoctorj>
+        <dependency-version.jruby>9.2.11.1</dependency-version.jruby>
     </properties>
 
     <modules>
         <module>asciidoc-to-html-example</module>
-        <module>asciidoctor-epub-example</module>
-        <module>asciidoctor-pdf-example</module>
-        <module>asciidoctor-pdf-with-theme-example</module>
+        <module>asciidoctor-convert-html-example</module>
+        <module>asciidoctor-convert-epub-example</module>
+        <module>asciidoctor-convert-pdf-example</module>
+        <module>asciidoctor-convert-pdf-with-theme-example</module>
+        <module>asciidoctor-theme-example</module>
+        <!-- 
+        <module>asciidoctor-multiple-backend-example</module>
+        -->
     </modules>
-    
+
     <build>
-        <defaultGoal>build</defaultGoal>
+        <defaultGoal>asciidoctor-convert</defaultGoal>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.asciidoctor</groupId>
+                    <artifactId>asciidoctor-maven-plugin</artifactId>
+                    <version>${plugin-version.asciidoctor}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.asciidoctor</groupId>
+                            <artifactId>asciidoctorj-epub3</artifactId>
+                            <version>${dependency-version.asciidoctorj-epub}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.asciidoctor</groupId>
+                            <artifactId>asciidoctorj-pdf</artifactId>
+                            <version>${dependency-version.asciidoctorj-pdf}</version>
+                        </dependency>
+                        <!-- Comment this section to use the default jruby artifact provided by the plugin -->
+                        <dependency>
+                            <groupId>org.jruby</groupId>
+                            <artifactId>jruby-complete</artifactId>
+                            <version>${dependency-version.jruby}</version>
+                        </dependency>
+                        <!-- Comment this section to use the default AsciidoctorJ artifact provided by the plugin -->
+                        <dependency>
+                            <groupId>org.asciidoctor</groupId>
+                            <artifactId>asciidoctorj</artifactId>
+                            <version>${dependency-version.asciidoctorj}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+
+                <plugin>
+                    <groupId>com.coutemeier.maven.plugins</groupId>
+                    <artifactId>asciidoctor-lifecycle-maven-plugin</artifactId>
+                    <version>${plugin-version.asciidoctor-lifecycle}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 </project>

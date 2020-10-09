@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    This is an example adapted from https://github.com/asciidoctor/asciidoctor-maven-examples/blob/master/asciidoc-to-html-example
+    to show how to use the asciidoctor-lifecycle-maven-plugin.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.coutemeier.maven.plugins.asciidoctor.lifecycle</groupId>
+        <artifactId>asciidoctor-lifecycle-maven-examples</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>..</relativePath>
+    </parent>
+
+    <artifactId>asciidoc-multiple-backend-example</artifactId>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>An example project that demonstrates how to convert AsciiDoc to multiple backends using the Asciidoctor Maven plugin and Asciidoctor Lifecycle Maven plugin.</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <asciidoctor.maven.plugin.version>2.0.0-RC.1</asciidoctor.maven.plugin.version>
+        <asciidoctorj.pdf.version>1.5.0-alpha.18</asciidoctorj.pdf.version>
+        <asciidoctorj.version>2.0.0</asciidoctorj.version>
+        <jruby.version>9.2.7.0</jruby.version>
+        
+        <version.asciidoctor-lifecycle-maven-plugin>1.0-SNAPSHOT</version.asciidoctor-lifecycle-maven-plugin>
+    </properties>
+
+    <build>
+        <defaultGoal>asciidoctor-convert</defaultGoal>
+        <plugins>
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <version>${asciidoctor.maven.plugin.version}</version>              
+                <dependencies>
+                    <dependency>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctorj-pdf</artifactId>
+                        <version>${asciidoctorj.pdf.version}</version>
+                    </dependency>
+                    <!-- Comment this section to use the default jruby artifact provided by the plugin -->
+                    <dependency>
+                        <groupId>org.jruby</groupId>
+                        <artifactId>jruby-complete</artifactId>
+                        <version>${jruby.version}</version>
+                    </dependency>
+                    <!-- Comment this section to use the default AsciidoctorJ artifact provided by the plugin -->
+                    <dependency>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctorj</artifactId>
+                        <version>${asciidoctorj.version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <backend>html5</backend>
+                    <sourceDirectory>src/docs/asciidoc</sourceDirectory>
+                    <sourceHighlighter>coderay</sourceHighlighter>
+                    <attributes>
+                        <!--  Shared configuration -->
+                        <sourcedir>${project.build.sourceDirectory}</sourcedir>
+                        <project-version>${project.version}</project-version>
+                        <imagesdir>./images</imagesdir>
+                        <icons>font</icons>
+
+                        <!-- HTML configuration -->
+                        <docinfo1>true</docinfo1>
+                        <idprefix/>
+                        <idseparator>-</idseparator>
+                        <sectanchors>true</sectanchors>
+                        <toc>left</toc>
+                    </attributes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-pdf</id>
+                        <phase>asciidoctor-convert</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <backend>pdf</backend>
+                            <attributes>
+                                <docinfo1>false</docinfo1>
+                                <idprefix/>
+                                <idseparator>-</idseparator>
+                                <pagenums/>
+                                <toc/>
+                                <sectanchors>false</sectanchors>
+                            </attributes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--
+            NOTE: Use the maven-resources-plugin if there are assets outside the AsciiDoc source folder
+                  that need to be copied to the generated-docs. The Maven plugin automatically copies
+                  non-AsciiDoc files in the AsciiDoc source folder to generated-docs.
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>copy-asciidoc-resources</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>src/docs/resources</directory>
+                                    <includes>
+                                        <include>**/*.jpg</include>
+                                        <include>**/*.png</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>target/generated-docs</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            -->
+            
+            <!-- We use the asciidoctor-lifecycle-maven-plugin as extension -->
+            <plugin>
+                <groupId>com.coutemeier.maven.plugins</groupId>
+                <artifactId>asciidoctor-lifecycle-maven-plugin</artifactId>
+                <version>${version.asciidoctor-lifecycle-maven-plugin}</version>
+                <extensions>true</extensions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

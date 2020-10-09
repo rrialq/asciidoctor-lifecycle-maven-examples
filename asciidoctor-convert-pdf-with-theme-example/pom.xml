@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.coutemeier.maven.plugins.asciidoctor.lifecycle</groupId>
+        <artifactId>asciidoctor-lifecycle-maven-examples</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>..</relativePath>
+    </parent>
+    
+    <artifactId>asciidoctor-convert-pdf-with-theme-example</artifactId>
+    <packaging>pom</packaging>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>An example project that demonstrates how to convert AsciiDoc to PDF using Asciidoctor PDF with the Asciidoctor Maven plugin and Asciidoctor Lifecycle Maven Plugin.</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <asciidoctor.maven.plugin.version>2.0.0-RC.1</asciidoctor.maven.plugin.version>
+        <asciidoctorj.pdf.version>1.5.0-alpha.18</asciidoctorj.pdf.version>
+        <asciidoctorj.version>2.0.0</asciidoctorj.version>
+        <jruby.version>9.2.7.0</jruby.version>
+        
+        <version.asciidoctor-lifecycle-maven-plugin>1.0-SNAPSHOT</version.asciidoctor-lifecycle-maven-plugin>
+    </properties>
+
+    <build>
+        <defaultGoal>asciidoctor-convert</defaultGoal>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>${plugin-version.maven-assembly}</version>
+                <executions>
+                    <execution>
+                        <id>create-theme</id>
+                        <phase>asciidoctor-pre-theme</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <descriptors>
+                                <descriptor>src/assembly/mycustomtheme.xml</descriptor>
+                            </descriptors>
+                            <finalName>mycustomtheme</finalName>
+                        </configuration>               
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>${plugin-version.maven-install}</version>
+                <executions>
+                    <execution>
+                        <id>theme-install</id>
+                        <phase>asciidoctor-pre-theme</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <file>${project.build.directory}/mycustomtheme.zip</file>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>embedded-theme</artifactId>
+                            <packaging>zip</packaging>
+                            <version>${project.version}</version>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <version>${asciidoctor.maven.plugin.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctorj-pdf</artifactId>
+                        <version>${asciidoctorj.pdf.version}</version>
+                    </dependency>
+                    <!-- Comment this section to use the default jruby artifact provided by the plugin -->
+                    <dependency>
+                        <groupId>org.jruby</groupId>
+                        <artifactId>jruby-complete</artifactId>
+                        <version>${jruby.version}</version>
+                    </dependency>
+                    <!-- Comment this section to use the default AsciidoctorJ artifact provided by the plugin -->
+                    <dependency>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctorj</artifactId>
+                        <version>${asciidoctorj.version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <sourceDirectory>src/docs/asciidoc</sourceDirectory>
+                    <!-- Attributes common to all output formats -->
+                    <attributes>
+                        <sourcedir>${project.build.sourceDirectory}</sourcedir>
+                    </attributes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-pdf-with-default-theme</id>
+                        <phase>asciidoctor-convert</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <backend>pdf</backend>
+                            <outputDirectory>${project.build.directory}/generated-docs-default-theme</outputDirectory>
+                            <sourceHighlighter>coderay</sourceHighlighter>
+                            <doctype>book</doctype>
+                            <attributes>
+                                <icons>font</icons>
+                                <pagenums/>
+                                <toc/>
+                                <idprefix/>
+                                <idseparator>-</idseparator>
+                            </attributes>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>generate-pdf-with-custom-theme</id>
+                        <phase>asciidoctor-convert</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <backend>pdf</backend>
+                            <outputDirectory>${project.build.directory}/generated-docs-custom-theme</outputDirectory>
+                            <sourceHighlighter>coderay</sourceHighlighter>
+                            <doctype>book</doctype>
+                            <attributes>
+                                <!-- 
+                                    The property "asciidoctor.theme.asciidoctor-create-theme-example.path" is created at theme-download phase,
+                                    so it is not needed to define it in the pom.xml.
+                                -->
+                                <pdf-stylesdir>${asciidoctor.theme.embedded-theme.path}/pdf</pdf-stylesdir>
+                                <pdf-style>custom</pdf-style>
+                                <icons>font</icons>
+                                <pagenums/>
+                                <toc/>
+                                <idprefix/>
+                                <idseparator>-</idseparator>
+                            </attributes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- We use the asciidoctor-lifecycle-maven-plugin as extension -->
+            <plugin>
+                <groupId>com.coutemeier.maven.plugins</groupId>
+                <artifactId>asciidoctor-lifecycle-maven-plugin</artifactId>
+                <version>${version.asciidoctor-lifecycle-maven-plugin}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <themes>
+                        <theme>com.coutemeier.maven.plugins.asciidoctor.lifecycle:embedded-theme:zip:1.0-SNAPSHOT</theme>
+                    </themes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
