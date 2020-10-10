@@ -49,7 +49,7 @@
                             <sourceDocumentName>spine.adoc</sourceDocumentName>
                             <attributes>
                                 <source-highlighter>coderay</source-highlighter>
-                                <ebook-format>kf8</ebook-format>
+<!--                            <ebook-format>epub3</ebook-format> -->
                             </attributes>
                         </configuration>
                     </execution>
